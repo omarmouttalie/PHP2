@@ -1,4 +1,15 @@
 <?php
+if (!empty($erreurs)) {
+    echo "<ul style='color:red;'>";
+    foreach ($erreurs as $err) {
+        echo "<li>$err</li>";
+    }
+    echo "</ul>";
+}
+?>
+
+
+<?php
 $erreurs = [];
 $nom = $email = '';
 
@@ -15,11 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $erreurs[] = "L'email n'est pas valide.";
     }
 
-    if (empty($erreurs)) {
+    else {
         echo "<p style='color:green;'>Formulaire envoyé avec succès !</p>";
     }
 }
 ?>
+
+
+
 <form method="POST" action="">
     <label>Nom :</label>
     <input type="text" name="nom" value="<?= htmlspecialchars($nom) ?>"><br>
@@ -31,12 +45,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </form>
 
 
-<?php
-if (!empty($erreurs)) {
-    echo "<ul style='color:red;'>";
-    foreach ($erreurs as $err) {
-        echo "<li>$err</li>";
-    }
-    echo "</ul>";
-}
-?>
+
