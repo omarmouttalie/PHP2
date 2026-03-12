@@ -4,12 +4,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = $_POST["name"];
     $email = $_POST["email"];
     $message = $_POST["message"];
+    $age = $_POST["age"];
 
-    if(empty($name) || empty($email) || empty($message)){
+    if(empty($name) || empty($email) || empty($message) || empty($age)){
         $result = "Please fill in all fields.";
     } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = "Invalid email format.";
-    } else {
+    }
+     elseif($age == 0) {
+         $result = "Age cannot be Zero!";
+     }
+    else {
         header('location: success.html');
         exit();
     }
@@ -41,6 +46,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="input-group">
             <label>Email</label>
             <input type="text" name="email" placeholder="hello@example.com">
+        </div>
+
+        <div class="input-group">
+            <label>Age</label>
+            <input type="number" name="age" placeholder="Enter your age..">
         </div>
 
         <div class="input-group">
